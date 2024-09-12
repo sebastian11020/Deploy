@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Despliegue Web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .container {
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Despliegue de la Aplicación</h1>
+    <button id="deployBtn">Desplegar Nueva Versión</button>
+    <p id="message"></p>
+  </div>
+  <script>
+    document.getElementById('deployBtn').addEventListener('click', () => {
+      fetch('/deploy', {
+        method: 'POST'
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('message').innerText = data;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('message').innerText = 'Error en el despliegue.';
+      });
+    });
+  </script>
+</body>
+</html>
